@@ -63,13 +63,12 @@ def createBppCtl(simPars, simComb, seed, rep):
     bppctlfile.write("cleandata = 0\n")
     bppctlfile.write("thetaprior = 3 " + str(2.0*float(theta)) + " e\n")
     bppctlfile.write("tauprior = 3 0.04 \n")
-    bppctlfile.write("phiprior = 3 " + str(2.0*float(varphi)) + "\n")
+    bppctlfile.write("phiprior = 1 1 \n")
     bppctlfile.write("finetune = 1: 21.06 .0002 .0003 .00001 .2 .01 .01 .01\n")
     bppctlfile.write("print = 1 0 0 0\n")
     bppctlfile.write("burnin = 20000\n")
     bppctlfile.write("sampfreq = 2\n")
     bppctlfile.write("nsample = 200000\n")
-    bppctlfile.write("scaling = 1\n")
 
     
 print('Generating control files for simulations...\n')
@@ -117,7 +116,7 @@ if choice == 'y':
         #        time.sleep(0.1)
         for i in range(1, 11):
             sf = " --simulate simgen" + ''.join(combo) + "." + str(i) + ".ctl"
-            os.system('./bpp4' + sf + ' > junk.txt 2>&1')
+            os.system('./bpp4' + sf + ' > screensim' + ''.join(combo) + '.' + str(i) + '.txt 2>&1')
     os.chdir('../')
 
 # wait 2 seconds
